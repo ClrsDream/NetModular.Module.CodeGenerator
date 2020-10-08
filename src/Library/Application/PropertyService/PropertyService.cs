@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using NetModular.Lib.Utils.Core.Models;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.CodeGenerator.Application.PropertyService.ViewModels;
 using NetModular.Module.CodeGenerator.Domain.Class;
 using NetModular.Module.CodeGenerator.Domain.Property;
@@ -44,7 +43,7 @@ namespace NetModular.Module.CodeGenerator.Application.PropertyService
                 return ResultModel.Failed("关联类不存在");
 
             var entity = _mapper.Map<PropertyEntity>(model);
-            entity.ProjectId = classEntity.ProjectId;
+            entity.ModuleId = classEntity.ModuleId;
 
             if (await _repository.Exists(entity))
             {

@@ -2,26 +2,35 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <!--复制本地锁定的程序集到输出目录-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetModular.Lib.Cache.MemoryCache" Version="1.5.2" />
-    <PackageReference Include="NetModular.Lib.Data.MySql" Version="1.5.9" />
-    <PackageReference Include="NetModular.Lib.Data.SQLite" Version="1.5.9" />
-    <PackageReference Include="NetModular.Lib.Data.SqlServer" Version="1.5.9" />
-    <PackageReference Include="NetModular.Lib.Host.Web" Version="1.5.3" />
-    <PackageReference Include="NetModular.Module.Admin.Web" Version="1.5.9" />
+    <PackageReference Include="NetModular.Lib.Cache.MemoryCache" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.Data.MySql" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.Data.SQLite" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.Data.SqlServer" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.Excel.EPPlus" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.Host.Web" Version="2.0.0" />
+    <PackageReference Include="NetModular.Lib.OSS.Local" Version="2.0.0" />
+    <PackageReference Include="NetModular.Module.Admin.Web" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Web\Web.csproj" />
   </ItemGroup>
 
-  <!--复制配置文件到输出目录-->
+  <Import Project="..\..\build\module.build.targets" />
+
   <ItemGroup>
-    <Content Update="config\**">
+    <!--复制配置文件到输出目录-->
+    <!--复制模块相关文件到输出路径中-->
+    <None Update="_modules\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 
 </Project>

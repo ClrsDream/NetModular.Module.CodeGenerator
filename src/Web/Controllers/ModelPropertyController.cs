@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NetModular.Lib.Auth.Web.Attributes;
 using NetModular.Lib.Utils.Core.Models;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.CodeGenerator.Application.ModelPropertyService;
 using NetModular.Module.CodeGenerator.Application.ModelPropertyService.ViewModels;
 using NetModular.Module.CodeGenerator.Domain.ModelProperty.Models;
@@ -14,7 +13,7 @@ namespace NetModular.Module.CodeGenerator.Web.Controllers
 {
     [Description("模型属性管理")]
     [Common]
-    public class ModelPropertyController : ModuleController
+    public class ModelPropertyController : Web.ModuleController
     {
         private readonly IModelPropertyService _service;
 
@@ -39,16 +38,16 @@ namespace NetModular.Module.CodeGenerator.Web.Controllers
 
         [HttpDelete]
         [Description("删除")]
-        public async Task<IResultModel> Delete([BindRequired]Guid id)
+        public Task<IResultModel> Delete([BindRequired]Guid id)
         {
-            return await _service.Delete(id);
+            return _service.Delete(id);
         }
 
         [HttpGet]
         [Description("编辑")]
-        public async Task<IResultModel> Edit([BindRequired]Guid id)
+        public Task<IResultModel> Edit([BindRequired]Guid id)
         {
-            return await _service.Edit(id);
+            return _service.Edit(id);
         }
 
         [HttpPost]

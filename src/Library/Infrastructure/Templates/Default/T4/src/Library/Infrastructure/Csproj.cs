@@ -26,18 +26,51 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
         public virtual string TransformText()
         {
             this.Write("<Project Sdk=\"Microsoft.NET.Sdk\">\r\n\r\n  <PropertyGroup>\r\n    <TargetFramework>nets" +
-                    "tandard2.0</TargetFramework>\r\n  </PropertyGroup>\r\n\r\n  <Import Project=\"..\\..\\..\\" +
-                    "build\\module.build.targets\" />\r\n\r\n  <ItemGroup>\r\n    <PackageReference Include=\"" +
-                    "");
+                    "tandard2.0</TargetFramework>\r\n  </PropertyGroup>\r\n\r\n  <ItemGroup>\r\n    <PackageR" +
+                    "eference Include=\"");
+            
+            #line 9 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_prefix));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.Config.Abstractions\" Version=\"");
+            
+            #line 9 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_versions.Lib_Config_Abstractions));
+            
+            #line default
+            #line hidden
+            this.Write("\" />\r\n\t  <PackageReference Include=\"");
+            
+            #line 10 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_prefix));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.Module.Abstractions\" Version=\"");
+            
+            #line 10 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_versions.Lib_Module_Abstractions));
+            
+            #line default
+            #line hidden
+            this.Write("\" />\r\n    <PackageReference Include=\"");
             
             #line 11 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_prefix));
             
             #line default
             #line hidden
-            this.Write(".Module.Admin.Domain\" Version=\"1.5.7\" />\r\n  </ItemGroup>\r\n \r\n  <ItemGroup>\r\n    <" +
-                    "ProjectReference Include=\"..\\Domain\\Domain.csproj\" />\r\n  </ItemGroup>\r\n\r\n</Proje" +
-                    "ct>\r\n");
+            this.Write(".Module.Admin.Domain\" Version=\"");
+            
+            #line 11 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\Library\Infrastructure\Csproj.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_versions.Module_Admin_Domain));
+            
+            #line default
+            #line hidden
+            this.Write("\" />\r\n  </ItemGroup>\r\n \r\n  <ItemGroup>\r\n    <ProjectReference Include=\"..\\Domain\\" +
+                    "Domain.csproj\" />\r\n  </ItemGroup>\r\n\r\n</Project>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

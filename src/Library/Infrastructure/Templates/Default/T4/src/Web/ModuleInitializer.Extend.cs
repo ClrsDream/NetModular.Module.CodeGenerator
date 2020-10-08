@@ -11,8 +11,10 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
         public ModuleInitializer(TemplateBuildModel model)
         {
             _model = model;
-            _prefix = model.Project.Prefix;
+            _prefix = model.Module.Prefix;
         }
+
+        public bool IsGlobal => true;
 
         public void Save()
         {

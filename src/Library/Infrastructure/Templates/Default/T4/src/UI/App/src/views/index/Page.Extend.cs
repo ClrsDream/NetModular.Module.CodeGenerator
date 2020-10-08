@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Module.CodeGenerator.Infrastructure.Templates.Models;
 
 namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.src.UI.App.src.views.index
@@ -15,15 +14,17 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
             _model = model;
         }
 
+        public bool IsGlobal => false;
+
         public void Save()
         {
-            if (_model.Project.ClassList != null && _model.Project.ClassList.Any())
+            if (_model.Module.ClassList != null && _model.Module.ClassList.Any())
             {
-                foreach (var classModel in _model.Project.ClassList)
+                foreach (var classModel in _model.Module.ClassList)
                 {
                     _class = classModel;
 
-                    var dir = Path.Combine(_model.RootPath, $"src/UI/{_model.Project.WebUIDicName}/src/views", _class.Name.FirstCharToLower(), "index");
+                    var dir = Path.Combine(_model.RootPath, $"src/UI/{_model.Module.WebUIDicName}/src/views", _class.Name.FirstCharToLower(), "index");
                     if (!Directory.Exists(dir))
                         Directory.CreateDirectory(dir);
 

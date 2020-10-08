@@ -5,32 +5,28 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Options;
 using NetModular.Lib.Auth.Web.Attributes;
+using NetModular.Lib.Config.Abstractions;
+using NetModular.Lib.Config.Abstractions.Impl;
 using NetModular.Lib.Utils.Core.Extensions;
-using NetModular.Lib.Utils.Core.Options;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.CodeGenerator.Application.ClassService;
 using NetModular.Module.CodeGenerator.Application.ClassService.ViewModels;
 using NetModular.Module.CodeGenerator.Domain.Class;
 using NetModular.Module.CodeGenerator.Domain.Class.Models;
-using NetModular.Module.CodeGenerator.Infrastructure.Options;
+using NetModular.Module.CodeGenerator.Infrastructure;
 
 namespace NetModular.Module.CodeGenerator.Web.Controllers
 {
     [Description("实体管理")]
     [Common]
-    public class ClassController : ModuleController
+    public class ClassController : Web.ModuleController
     {
         private readonly IClassService _service;
-        private readonly ModuleCommonOptions _commonOptions;
-        private readonly CodeGeneratorOptions _codeGeneratorOptions;
-
-        public ClassController(IClassService service, IOptionsMonitor<ModuleCommonOptions> commonOption, IOptionsMonitor<CodeGeneratorOptions> codeGeneratorOptions)
+        private readonly IConfigProvider _configProvider;
+        public ClassController(IClassService service, IConfigProvider configProvider)
         {
             _service = service;
-            _codeGeneratorOptions = codeGeneratorOptions.CurrentValue;
-            _commonOptions = commonOption.CurrentValue;
+            _configProvider = configProvider;
         }
 
         [HttpGet]
@@ -49,16 +45,16 @@ namespace NetModular.Module.CodeGenerator.Web.Controllers
 
         [HttpDelete]
         [Description("删除")]
-        public async Task<IResultModel> Delete([BindRequired]Guid id)
+        public Task<IResultModel> Delete([BindRequired]Guid id)
         {
-            return await _service.Delete(id);
+            return _service.Delete(id);
         }
 
         [HttpGet]
         [Description("编辑")]
-        public async Task<IResultModel> Edit([BindRequired]Guid id)
+        public Task<IResultModel> Edit([BindRequired]Guid id)
         {
-            return await _service.Edit(id);
+            return _service.Edit(id);
         }
 
         [HttpPost]
@@ -81,8 +77,7 @@ namespace NetModular.Module.CodeGenerator.Web.Controllers
         public async Task<IActionResult> BuildCode([BindRequired]Guid id)
         {
             var result = await _service.BuildCode(id);
-            var path = Path.Combine(_commonOptions.TempPath, _codeGeneratorOptions.BuildCodePath, result.Data.Id + ".zip");
-            return PhysicalFile(path, "application/octet-stream", HttpUtility.UrlEncode(result.Data.Name), true);
+            return PhysicalFile(result.Data.ZipPath, "application/octet-stream", HttpUtility.UrlEncode(result.Data.Name), true);
         }
     }
 }

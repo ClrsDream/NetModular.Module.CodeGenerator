@@ -15,7 +15,7 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+    #line 1 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class DirectoryBuildProps : DirectoryBuildPropsBase
     {
@@ -27,45 +27,73 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
         {
             this.Write("<Project>\r\n  <PropertyGroup>\r\n    <Id>");
             
-            #line 4 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Project.Code));
+            #line 4 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Module.No<10 ? "0" + _model.Module.No : _model.Module.No + ""));
             
             #line default
             #line hidden
-            this.Write("</Id>\r\n    <Name>");
+            this.Write("</Id>\r\n    <Code>");
             
-            #line 5 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Project.Name));
+            #line 5 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Module.Code));
             
             #line default
             #line hidden
-            this.Write(@"</Name>
-    <Authors>Oldli</Authors>
-    <Version>1.0.0</Version>
-    <Description>NetModular Module $(Id)($(Name)) - $(MSBuildProjectName)</Description>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-    <LangVersion>Latest</LangVersion>
-    <RootNamespacePrefix>");
+            this.Write("</Code>\r\n\t<Name>");
             
-            #line 11 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            #line 6 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Module.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</Name>\r\n    <Authors>Oldli</Authors>\r\n    <Icon>");
+            
+            #line 8 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Module.Icon));
+            
+            #line default
+            #line hidden
+            this.Write("</Icon>\r\n    <Version>1.0.0</Version>\r\n    <Description>NetModular Module $(Code)" +
+                    "($(Name)) - $(MSBuildProjectName)</Description>\r\n    <NoWarn>$(NoWarn);1591</NoW" +
+                    "arn>\r\n    <LangVersion>Latest</LangVersion>\r\n    <RootNamespacePrefix>");
+            
+            #line 13 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_prefix));
             
             #line default
             #line hidden
-            this.Write(@".Module.$(Id)</RootNamespacePrefix>
+            this.Write(@".Module.$(Code)</RootNamespacePrefix>
     <AssemblyName>$(RootNamespacePrefix).$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <!--设置打包路径-->
     <PackageOutputPath>$(SolutionDir)\_packages</PackageOutputPath>
-    <Company>Oldli</Company>
-    <Copyright>Oldli</Copyright>
-    <PackageProjectUrl>https://nm.iamoldli.com/docs/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/iamoldli/NetModular.Module.");
+    <Company>");
             
-            #line 21 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Project.Code));
+            #line 20 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_company));
+            
+            #line default
+            #line hidden
+            this.Write("</Company>\r\n    <Copyright>");
+            
+            #line 21 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_copyright));
+            
+            #line default
+            #line hidden
+            this.Write("</Copyright>\r\n    <PackageProjectUrl>");
+            
+            #line 22 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_projectUrl));
+            
+            #line default
+            #line hidden
+            this.Write("</PackageProjectUrl>\r\n    <RepositoryUrl>");
+            
+            #line 23 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\src\DirectoryBuildProps.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_repositoryUrl));
             
             #line default
             #line hidden

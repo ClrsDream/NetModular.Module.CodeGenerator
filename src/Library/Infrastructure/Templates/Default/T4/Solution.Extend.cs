@@ -12,6 +12,8 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4
             _model = model;
         }
 
+        public bool IsGlobal => true;
+
         public void Save()
         {
             var content = TransformText();
@@ -20,7 +22,7 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4
             {
                 Directory.CreateDirectory(dir);
             }
-            var filePath = Path.Combine(dir, _model.Project.Code + ".sln");
+            var filePath = Path.Combine(dir, _model.Module.Code + ".sln");
             File.WriteAllText(filePath, content);
         }
     }

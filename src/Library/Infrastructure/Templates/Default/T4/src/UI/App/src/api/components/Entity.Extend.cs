@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Module.CodeGenerator.Infrastructure.Templates.Models;
 
 namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.src.UI.App.src.api.components
@@ -18,17 +14,19 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
             _model = model;
         }
 
+        public bool IsGlobal => false;
+
         public void Save()
         {
             var dir = Path.Combine(_model.RootPath,
-                $"src/UI/{_model.Project.WebUIDicName}/src/api/components");
+                $"src/UI/{_model.Module.WebUIDicName}/src/api/components");
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            if (_model.Project.ClassList != null && _model.Project.ClassList.Any())
+            if (_model.Module.ClassList != null && _model.Module.ClassList.Any())
             {
-                foreach (var classModel in _model.Project.ClassList)
+                foreach (var classModel in _model.Module.ClassList)
                 {
                     _class = classModel;
 

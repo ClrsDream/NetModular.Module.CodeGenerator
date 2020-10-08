@@ -3,26 +3,38 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <!--复制本地锁定的程序集到输出目录-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="<#= _prefix #>.Lib.Cache.MemoryCache" Version="1.5.1" />
-    <PackageReference Include="<#= _prefix #>.Lib.Data.MySql" Version="1.5.6" />
-    <PackageReference Include="<#= _prefix #>.Lib.Data.SQLite" Version="1.5.6" />
-    <PackageReference Include="<#= _prefix #>.Lib.Data.SqlServer" Version="1.5.6" />
-    <PackageReference Include="<#= _prefix #>.Lib.Host.Web" Version="1.5.2" />
-    <PackageReference Include="<#= _prefix #>.Module.Admin.Web" Version="1.5.7" />
+	<PackageReference Include="<#= _prefix #>.Lib.Cache.MemoryCache" Version="<#= _versions.Lib_Cache_MemoryCache #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.Data.MySql" Version="<#= _versions.Lib_Data_MySql #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.Data.SQLite" Version="<#= _versions.Lib_Data_SQLite #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.Data.SqlServer" Version="<#= _versions.Lib_Data_SqlServer #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.Excel.EPPlus" Version="<#= _versions.Lib_Excel_EPPlus #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.Host.Web" Version="<#= _versions.Lib_Host_Web #>" />
+    <PackageReference Include="<#= _prefix #>.Lib.OSS.Local" Version="<#= _versions.Lib_OSS_Local #>" />
+    <PackageReference Include="<#= _prefix #>.Module.Admin.Web" Version="<#= _versions.Module_Admin_Web #>" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Web\Web.csproj" />
   </ItemGroup>
+  
+  <Import Project="..\..\build\module.build.targets" />
 
-  <!--复制配置文件到输出目录-->
   <ItemGroup>
-    <Content Update="config\**">
+    <!--复制配置文件到输出目录-->
+    <None Update="config\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <!--复制模块相关文件到输出路径中-->
+    <None Update="_modules\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

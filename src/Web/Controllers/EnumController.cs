@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NetModular.Lib.Auth.Web.Attributes;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.CodeGenerator.Application.EnumService;
 using NetModular.Module.CodeGenerator.Application.EnumService.ViewModels;
 using NetModular.Module.CodeGenerator.Domain.Enum.Models;
@@ -12,7 +11,7 @@ using NetModular.Module.CodeGenerator.Domain.Enum.Models;
 namespace NetModular.Module.CodeGenerator.Web.Controllers
 {
     [Description("枚举管理")]
-    public class EnumController : ModuleController
+    public class EnumController : Web.ModuleController
     {
         private readonly IEnumService _service;
 
@@ -37,16 +36,16 @@ namespace NetModular.Module.CodeGenerator.Web.Controllers
 
         [HttpDelete]
         [Description("删除")]
-        public async Task<IResultModel> Delete([BindRequired] Guid id)
+        public Task<IResultModel> Delete([BindRequired] Guid id)
         {
-            return await _service.Delete(id);
+            return _service.Delete(id);
         }
 
         [HttpGet]
         [Description("编辑")]
-        public async Task<IResultModel> Edit([BindRequired] Guid id)
+        public Task<IResultModel> Edit([BindRequired] Guid id)
         {
-            return await _service.Edit(id);
+            return _service.Edit(id);
         }
 
         [HttpPost]

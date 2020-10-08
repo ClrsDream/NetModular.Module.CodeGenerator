@@ -15,7 +15,7 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.bu
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\MyProject\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\build\ModuleBuildTargets.tt"
+    #line 1 "D:\MyProject\NetModular\NetModular.Module.CodeGenerator\src\Library\Infrastructure\Templates\Default\T4\build\ModuleBuildTargets.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ModuleBuildTargets : ModuleBuildTargetsBase
     {
@@ -27,30 +27,21 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.bu
         {
             this.Write(@"<Project>
 
-  <PropertyGroup>
-    <ModulesDir>_modules\$(Id)</ModulesDir>
-    <ModuleName>$(ModulesDir)\_module.json</ModuleName>
-    <ModuleInfo>{""Id"": ""$(Id)"",""Name"":""$(Name)"",""Version"":""$(Version)""}</ModuleInfo>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ModulesDir>_modules\$(Id)_$(Code)</ModulesDir>
+		<ModuleName>$(ModulesDir)\_module.json</ModuleName>
+		<ModuleInfo>{""Id"": ""$(Id)"",""Name"":""$(Name)"",""Code"":""$(Code)"",""Icon"":""$(Icon)"",""Version"":""$(Version)"",""Description"":""$(Description)""}</ModuleInfo>
+	</PropertyGroup>
 
-  <!--嵌入module.json文件-->
-  <ItemGroup Condition=""Exists('$(ModuleName)')"">
-    <Content Remove=""$(ModuleName)"" />
-  </ItemGroup>
+	<Target Name=""ModulesBuild"" AfterTargets=""Build"">
 
-  <ItemGroup Condition=""Exists('$(ModuleName)')"">
-    <EmbeddedResource Include=""$(ModuleName)"" Watch=""false""/>
-  </ItemGroup>
+		<!--创建modules目录-->
+		<MakeDir Directories=""$(ModulesDir)""/>
 
-  <Target Name=""ModulesBuildBefore"" AfterTargets=""Build"">
+		<!--生成module.json文件，Note：项目需要生成两次，否则Nuget包中的文件不是最新的-->
+		<WriteLinesToFile File=""$(ModuleName)"" Overwrite=""true"" Lines=""$(ModuleInfo)"" />
 
-    <!--创建modules目录-->
-    <MakeDir Directories=""$(ModulesDir)""/>
-
-    <!--生成module.json文件，Note：项目需要生成两次，否则Nuget包中的文件不是最新的-->
-    <WriteLinesToFile File=""$(ModuleName)"" Overwrite=""true"" Lines=""$(ModuleInfo)"" />
-
-  </Target>
+	</Target>
 
 </Project>");
             return this.GenerationEnvironment.ToString();

@@ -12,9 +12,11 @@ namespace NetModular.Module.CodeGenerator.Infrastructure.Templates.Default.T4.sr
             _model = model;
         }
 
+        public bool IsGlobal => true;
+
         public void Save()
         {
-            var dir = Path.Combine(_model.RootPath, $"src/UI/{_model.Project.WebUIDicName}/src/api");
+            var dir = Path.Combine(_model.RootPath, $"src/UI/{_model.Module.WebUIDicName}/src/api");
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
